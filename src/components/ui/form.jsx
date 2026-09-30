@@ -47,7 +47,7 @@ export default function Form({ onAddTask }) {
           <button
             type="button"
             aria-label="Kategori tugas"
-            className="rounded-full border border-slate-300/80 px-4 py-2 text-sm text-slate-700 transition-colors hover:bg-white/70"
+            className="rounded-full border border-slate-300/80 px-2 py-2 text-sm text-slate-700 transition-colors hover:bg-white/70"
           >
             <RiPriceTag3Line />
           </button>

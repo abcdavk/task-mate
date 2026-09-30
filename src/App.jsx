@@ -17,7 +17,7 @@ const DUMMY_DATA = [
   {
     judul: "Mengerjakan ppt",
     tgl: "4/10/2025",
-    selesai: false,
+    selesai: true,
   },
 ];
 
