@@ -1,23 +1,29 @@
 import { Component as BackgroundGradient } from "./components/ui/bg-gredient";
 import "./App.css";
+import "./styles/tasklist.css"; // [daftar] style bagian daftar tugas
 import TaskForm from "./components/ui/form";
 import { useState } from "react";
-import { ToDoItems } from "./components/ui/taskList";
+import TaskSection from "./components/ui/taskSection"; // [daftar]
+
+// [daftar] tiap tugas sekarang punya `id`, dan tgl memakai format YYYY-MM-DD
 const DUMMY_DATA = [
   {
+    id: 1,
     judul: "Mengerjakan tugas anu",
-    tgl: "2/10/2025",
+    tgl: "2025-10-02",
     selesai: false,
   },
   {
+    id: 2,
     judul: "Mengerjakan tugas lain",
-    tgl: "3/10/2025",
+    tgl: "2025-10-03",
     selesai: false,
   },
   {
+    id: 3,
     judul: "Mengerjakan ppt",
-    tgl: "4/10/2025",
-    selesai: true,
+    tgl: "2025-10-04",
+    selesai: false,
   },
 ];
 
@@ -36,18 +42,15 @@ function App() {
             Sini bagi tugas lu, kek dikerjain aja
           </h1>
         </div>
-        {todo.map((item) => (
-          <ToDoItems
-            key={item.judul}
-            judul={item.judul}
-            tgl={item.tgl}
-            selesai={item.selesai}
-            update={setTodo}
-          />
-        ))}
+
+        <TaskSection tasks={todo} setTasks={setTodo} />
+
         <TaskForm
           onAddTask={(newTask) =>
-            setTodo((currentTodo) => [...currentTodo, newTask])
+            setTodo((currentTodo) => [
+              ...currentTodo,
+              { ...newTask, id: Date.now() },
+            ])
           }
         />
       </section>
