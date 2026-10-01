@@ -54,7 +54,6 @@ function App() {
 
         <section className="app-content flex min-h-screen w-full flex-col items-center gap-5 px-5 py-12">
           <div className="w-full text-center">
-            <p className="app-content__vault-name">{currentVault?.nama}</p>
             <h1 className="text-black text-4xl font-normal tracking-wide">
               Hallo Gantengg
             </h1>
