@@ -4,31 +4,32 @@ import "./styles/tasklist.css"; // [daftar] style bagian daftar tugas
 import TaskForm from "./components/ui/form";
 import { useState } from "react";
 import TaskSection from "./components/ui/taskSection"; // [daftar]
+import { addTask, getTasks } from "./utils/storage";
 
 // [daftar] tiap tugas sekarang punya `id`, dan tgl memakai format YYYY-MM-DD
-const DUMMY_DATA = [
-  {
-    id: 1,
-    judul: "Mengerjakan tugas anu",
-    tgl: "2025-10-02",
-    selesai: false,
-  },
-  {
-    id: 2,
-    judul: "Mengerjakan tugas lain",
-    tgl: "2025-10-03",
-    selesai: false,
-  },
-  {
-    id: 3,
-    judul: "Mengerjakan ppt",
-    tgl: "2025-10-04",
-    selesai: false,
-  },
-];
+// const DUMMY_DATA = [
+//   {
+//     id: 1,
+//     judul: "Mengerjakan tugas anu",
+//     tgl: "2025-10-02",
+//     selesai: false,
+//   },
+//   {
+//     id: 2,
+//     judul: "Mengerjakan tugas lain",
+//     tgl: "2025-10-03",
+//     selesai: false,
+//   },
+//   {
+//     id: 3,
+//     judul: "Mengerjakan ppt",
+//     tgl: "2025-10-04",
+//     selesai: false,
+//   },
+// ];
 
 function App() {
-  const [todo, setTodo] = useState(DUMMY_DATA);
+  const [todo, setTodo] = useState(getTasks());
 
   return (
     <main className="app-shell">
@@ -46,11 +47,19 @@ function App() {
         <TaskSection tasks={todo} setTasks={setTodo} />
 
         <TaskForm
-          onAddTask={(newTask) =>
-            setTodo((currentTodo) => [
-              ...currentTodo,
-              { ...newTask, id: Date.now() },
-            ])
+          onAddTask={(newTask) =>{
+              const task = {
+                ...newTask,
+                id: Date.now(),
+              };
+
+              setTodo((currentTodo) => [
+                ...currentTodo,
+                task,
+              ]);
+
+              addTask(task);
+            }
           }
         />
       </section>

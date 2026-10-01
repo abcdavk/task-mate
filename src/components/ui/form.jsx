@@ -41,6 +41,7 @@ export default function Form({ onAddTask }) {
           <input
             type="date"
             ref={tglTodoRef}
+            defaultValue={new Date().toISOString().split("T")[0]}
             aria-label="Tanggal tugas"
             className="rounded-full border border-slate-300/80 px-3 py-2 text-sm text-slate-700 transition-colors hover:bg-white/70"
           />
