@@ -35,6 +35,8 @@ function FilterBar({ search, onSearchChange, filter, onFilterChange }) {
         </select>
         <ChevronDownIcon className="filter-field__chevron" />
       </div>
+
+
     </div>
   );
 }

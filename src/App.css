@@ -25,6 +25,46 @@
   content: "";
 }
 
+.app-layout {
+  position: relative;
+  display: flex;
+  min-height: 100svh;
+}
+
+.app-content {
+  flex: 1;
+  min-width: 0;
+  max-width: none;
+}
+
+.app-content__vault-name {
+  margin: 0 0 8px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.app-content form.fixed {
+  left: calc(50% + 126px);
+}
+
+@media (max-width: 767px) {
+  .app-content {
+    min-height: calc(100svh - 220px);
+    padding-top: 32px;
+  }
+
+  .app-content form.fixed {
+    left: 50%;
+  }
+
+  .tl-container {
+    width: 100%;
+  }
+}
+
 
 
 .counter {
