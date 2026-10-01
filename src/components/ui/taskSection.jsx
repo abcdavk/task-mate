@@ -2,6 +2,7 @@ import { useState } from "react";
 import FilterBar from "./filterBar";
 import TaskList from "./taskList";
 import ConfirmDialog from "./confirmDialog";
+import { editTask, removeTask } from "../../utils/storage";
 
 
 function TaskSection({ tasks, setTasks }) {
@@ -15,10 +16,17 @@ function TaskSection({ tasks, setTasks }) {
         task.id === id ? { ...task, selesai: !task.selesai } : task
       )
     );
+
+    const task = tasks.find((task) => task.id === id);
+
+    editTask(id, {
+      selesai: !task.selesai,
+    });
   };
 
   const deleteTask = (id) => {
     setTasks((prev) => prev.filter((task) => task.id !== id));
+    removeTask(id)
   };
 
   
