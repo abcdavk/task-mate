@@ -1,10 +1,33 @@
-import { RiArrowUpLine, RiPriceTag3Line } from "@remixicon/react";
+import { RiArrowUpLine, RiCalendar2Line } from "@remixicon/react";
 import { useRef, useState } from "react";
 
 export default function Form({ onAddTask }) {
   const [error, setError] = useState("");
+  const [selectedDate, setSelectedDate] = useState("");
   const judulTodoRef = useRef(null);
   const tglTodoRef = useRef(null);
+
+  function formatDate(dateString) {
+    if (!dateString) return "";
+
+    const date = new Date(dateString + "T00:00:00");
+    return new Intl.DateTimeFormat("id-ID", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    }).format(date);
+  }
+
+  function openDatePicker() {
+    if (!tglTodoRef.current) return;
+
+    if (typeof tglTodoRef.current.showPicker === "function") {
+      tglTodoRef.current.showPicker();
+      return;
+    }
+
+    tglTodoRef.current.focus();
+  }
 
   function updateTodo(event) {
     event.preventDefault();
@@ -18,7 +41,9 @@ export default function Form({ onAddTask }) {
 
     onAddTask({ judul, tgl, selesai: false });
     judulTodoRef.current.value = "";
-    tglTodoRef.current.value = "";
+    const today = new Date().toISOString().split("T")[0];
+    setSelectedDate(today);
+    tglTodoRef.current.value = today;
     setError("");
   }
 
@@ -36,21 +61,29 @@ export default function Form({ onAddTask }) {
       />
       {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
 
-      <div className="mt-8 flex items-center justify-between pt-3">
-        <div className="gap-2 flex">
-          <input
-            type="date"
-            ref={tglTodoRef}
-            defaultValue={new Date().toISOString().split("T")[0]}
-            aria-label="Tanggal tugas"
-            className="rounded-full border border-slate-300/80 px-3 py-2 text-sm text-slate-700 transition-colors hover:bg-white/70"
-          />
+      {selectedDate && (
+        <div className="mt-2 w-fit cursor-pointer rounded-lg bg-white/70 px-3 border transition-colors hover:bg-white/70 border-slate-300/80 py-1 text-xs">
+          <p className="text-black/70">{formatDate(selectedDate)}</p>
+        </div>
+      )}
+
+      <div className="flex items-center justify-between pt-3">
+        <div className="flex gap-2">
           <button
             type="button"
-            aria-label="Kategori tugas"
-            className="rounded-full border border-slate-300/80 px-2 py-2 text-sm text-slate-700 transition-colors hover:bg-white/70"
+            onClick={openDatePicker}
+            aria-label="Pilih tanggal tugas"
+            className="relative grid h-10 w-10 cursor-pointer place-items-center rounded-full border border-slate-300/80 bg-white/70 transition-colors hover:bg-white/70"
           >
-            <RiPriceTag3Line />
+            <RiCalendar2Line className="size-4 text-black/70" />
+            <input
+              type="date"
+              ref={tglTodoRef}
+              value={selectedDate || new Date().toISOString().split("T")[0]}
+              onChange={(event) => setSelectedDate(event.target.value)}
+              aria-label="Tanggal tugas"
+              className="absolute inset-0 h-full w-full cursor-pointer opacity-0 pointer-events-none"
+            />
           </button>
         </div>
         <button

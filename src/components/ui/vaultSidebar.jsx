@@ -128,7 +128,6 @@ export default function VaultSidebar({
           shadow-xl
           transition-transform duration-200
 
-          md:sticky md:top-0
           md:h-screen md:w-64
           md:flex-none
           md:translate-x-0

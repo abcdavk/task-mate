@@ -5,19 +5,27 @@ import ConfirmDialog from "./confirmDialog";
 
 function TaskSection({ tasks, setTasks, taskStorage }) {
   const [search, setSearch] = useState("");
-  const [filter, setFilter] = useState("all"); 
+  const [filter, setFilter] = useState("all");
   const [pendingDeleteId, setPendingDeleteId] = useState(null);
 
   const toggleTask = (id) => {
     const task = tasks.find((item) => item.id === id);
     if (!task) return;
 
-    taskStorage.editTask(id, { selesai: !task.selesai });
+    const nextSelesai = !task.selesai;
+    taskStorage.editTask(id, { selesai: nextSelesai });
     setTasks((prev) =>
       prev.map((task) =>
-        task.id === id ? { ...task, selesai: !task.selesai } : task
-      )
+        task.id === id ? { ...task, selesai: nextSelesai } : task,
+      ),
     );
+
+    if (
+      (filter === "active" && nextSelesai) ||
+      (filter === "completed" && !nextSelesai)
+    ) {
+      setFilter("all");
+    }
   };
 
   const deleteTask = (id) => {
@@ -25,7 +33,23 @@ function TaskSection({ tasks, setTasks, taskStorage }) {
     setTasks((prev) => prev.filter((task) => task.id !== id));
   };
 
-  
+  const editTask = (id, changes) => {
+    const task = tasks.find((item) => item.id === id);
+    if (!task) return;
+
+    const nextJudul = changes.judul?.trim();
+    const nextTgl = changes.tgl;
+
+    if (!nextJudul || !nextTgl) return;
+
+    taskStorage.editTask(id, { judul: nextJudul, tgl: nextTgl });
+    setTasks((prev) =>
+      prev.map((task) =>
+        task.id === id ? { ...task, judul: nextJudul, tgl: nextTgl } : task,
+      ),
+    );
+  };
+
   const requestDelete = (id) => setPendingDeleteId(id);
   const cancelDelete = () => setPendingDeleteId(null);
   const confirmDelete = () => {
@@ -61,6 +85,7 @@ function TaskSection({ tasks, setTasks, taskStorage }) {
         tasks={visibleTasks}
         onToggle={toggleTask}
         onDelete={requestDelete}
+        onEdit={editTask}
       />
 
       {pendingTask && (
