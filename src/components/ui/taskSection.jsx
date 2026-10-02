@@ -83,6 +83,10 @@ function TaskSection({ tasks, setTasks, taskStorage, vault }) {
     return matchSearch && matchStatus;
   });
 
+  const totalTasks = tasks.length;
+  const completedTasks = tasks.filter((task) => task.selesai).length;
+  const activeTasks = totalTasks - completedTasks;
+
   return (
     <div className="tl-container">
       <FilterBar
@@ -93,7 +97,8 @@ function TaskSection({ tasks, setTasks, taskStorage, vault }) {
       />
 
       <p className="tl-count">
-        Menampilkan {visibleTasks.length} dari {tasks.length} tugas
+        Total {totalTasks} | Belum selesai {activeTasks} | Selesai{" "}
+        {completedTasks}
       </p>
 
       <TaskList

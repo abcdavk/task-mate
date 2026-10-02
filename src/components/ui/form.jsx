@@ -30,6 +30,8 @@ export default function Form({ onAddTask, vault }) {
   const judulTodoRef = useRef(null);
   const tglTodoRef = useRef(null);
   const notesTodoRef = useRef(null);
+  const coursePickerRef = useRef(null);
+  const courseButtonRef = useRef(null);
 
   useEffect(() => {
     const nextCourses = getCoursesFromStorage(vault);
@@ -39,6 +41,22 @@ export default function Form({ onAddTask, vault }) {
       setSelectedCourse("");
     }
   }, [vault]);
+
+  useEffect(() => {
+    if (!showCoursePicker) return;
+
+    const handlePointerDown = (event) => {
+      const isInsidePicker = coursePickerRef.current?.contains(event.target);
+      const isInsideButton = courseButtonRef.current?.contains(event.target);
+
+      if (!isInsidePicker && !isInsideButton) {
+        setShowCoursePicker(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handlePointerDown);
+    return () => document.removeEventListener("mousedown", handlePointerDown);
+  }, [showCoursePicker]);
 
   function formatDate(dateString) {
     if (!dateString) return "";
@@ -77,6 +95,23 @@ export default function Form({ onAddTask, vault }) {
     setSelectedCourse(normalizedCourse);
     setNewCourse("");
     setShowCoursePicker(false);
+  }
+
+  function removeCourse(courseToRemove) {
+    if (!courseToRemove) return;
+
+    const storageKey = getCourseStorageKey(vault);
+    const nextCourses = courses.filter((course) => course !== courseToRemove);
+
+    if (storageKey) {
+      localStorage.setItem(storageKey, JSON.stringify(nextCourses));
+    }
+
+    setCourses(nextCourses);
+
+    if (selectedCourse === courseToRemove) {
+      setSelectedCourse("");
+    }
   }
 
   function updateTodo(event) {
@@ -155,6 +190,7 @@ export default function Form({ onAddTask, vault }) {
 
           <div className="relative">
             <button
+              ref={courseButtonRef}
               type="button"
               onClick={() => setShowCoursePicker((value) => !value)}
               aria-label="Pilih matakuliah"
@@ -164,21 +200,36 @@ export default function Form({ onAddTask, vault }) {
             </button>
 
             {showCoursePicker && (
-              <div className="absolute bottom-12 left-0 z-20 w-64 rounded-xl border border-slate-200 bg-white p-2 shadow-lg shadow-slate-950/10">
+              <div
+                ref={coursePickerRef}
+                className="absolute bottom-12 left-0 z-20 w-64 rounded-xl border border-slate-200 bg-white p-2 shadow-lg shadow-slate-950/10"
+              >
                 {courses.length > 0 ? (
                   <div className="max-h-40 space-y-1 overflow-y-auto">
                     {courses.map((course) => (
-                      <button
+                      <div
                         key={course}
-                        type="button"
-                        onClick={() => {
-                          setSelectedCourse(course);
-                          setShowCoursePicker(false);
-                        }}
-                        className="w-full rounded-lg px-2 py-1.5 text-left text-sm text-slate-700 transition-colors hover:bg-slate-100"
+                        className="flex items-center gap-2 rounded-lg px-2 py-1.5 hover:bg-slate-100"
                       >
-                        {course}
-                      </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setSelectedCourse(course);
+                            setShowCoursePicker(false);
+                          }}
+                          className="flex-1 text-left text-sm text-slate-700 transition-colors"
+                        >
+                          {course}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => removeCourse(course)}
+                          aria-label={`Hapus matakuliah ${course}`}
+                          className="rounded-md px-1.5 py-0.5 text-xs text-slate-500 transition-colors hover:text-red-600"
+                        >
+                          Hapus
+                        </button>
+                      </div>
                     ))}
                   </div>
                 ) : (
