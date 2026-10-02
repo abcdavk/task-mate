@@ -57,11 +57,11 @@ function App() {
         <section className="app-content flex min-h-screen w-full flex-col items-center gap-5 px-5 py-12">
           <div className="w-full text-center">
             <h1 className="text-black text-4xl font-normal tracking-wide">
-              Hallo Gantengg
+              Katanya Mau Lulus <span className="text-blue-500">Tepat Waktu?</span>
             </h1>
 
             <h1 className="text-black text-4xl font-normal tracking-wide">
-              Sini bagi tugas lu, kek dikerjain aja
+              Ngelist dulu, abis itu lanjut mabar
             </h1>
           </div>
 
