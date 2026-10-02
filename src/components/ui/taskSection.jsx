@@ -3,7 +3,7 @@ import FilterBar from "./filterBar";
 import TaskList from "./taskList";
 import ConfirmDialog from "./confirmDialog";
 
-function TaskSection({ tasks, setTasks, taskStorage }) {
+function TaskSection({ tasks, setTasks, taskStorage, vault }) {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("all");
   const [pendingDeleteId, setPendingDeleteId] = useState(null);
@@ -39,13 +39,28 @@ function TaskSection({ tasks, setTasks, taskStorage }) {
 
     const nextJudul = changes.judul?.trim();
     const nextTgl = changes.tgl;
+    const nextNotes = changes.notes?.trim() ?? task.notes ?? "";
+    const nextKategori = (changes.kategori ?? task.kategori ?? "").trim();
 
     if (!nextJudul || !nextTgl) return;
 
-    taskStorage.editTask(id, { judul: nextJudul, tgl: nextTgl });
+    taskStorage.editTask(id, {
+      judul: nextJudul,
+      tgl: nextTgl,
+      notes: nextNotes,
+      kategori: nextKategori,
+    });
     setTasks((prev) =>
       prev.map((task) =>
-        task.id === id ? { ...task, judul: nextJudul, tgl: nextTgl } : task,
+        task.id === id
+          ? {
+              ...task,
+              judul: nextJudul,
+              tgl: nextTgl,
+              notes: nextNotes,
+              kategori: nextKategori,
+            }
+          : task,
       ),
     );
   };
@@ -86,6 +101,7 @@ function TaskSection({ tasks, setTasks, taskStorage }) {
         onToggle={toggleTask}
         onDelete={requestDelete}
         onEdit={editTask}
+        vault={vault}
       />
 
       {pendingTask && (

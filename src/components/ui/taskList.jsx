@@ -1,6 +1,6 @@
 import TaskItem from "./taskItem";
 
-function TaskList({ tasks, onToggle, onDelete, onEdit }) {
+function TaskList({ tasks, onToggle, onDelete, onEdit, vault }) {
   if (tasks.length === 0) {
     return (
       <div className="task-empty">
@@ -21,6 +21,7 @@ function TaskList({ tasks, onToggle, onDelete, onEdit }) {
           onToggle={onToggle}
           onDelete={onDelete}
           onEdit={onEdit}
+          vault={vault}
         />
       ))}
     </ul>

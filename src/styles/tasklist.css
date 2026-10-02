@@ -107,7 +107,7 @@ input.filter-field__control {
   display: grid;
   align-items: start;
   grid-template-columns: auto minmax(0, 1fr) auto;
-  grid-template-areas: "check title delete" "check meta delete";
+  grid-template-areas: "check title delete" "check notes delete" "check meta delete";
   column-gap: 14px;
   row-gap: 6px;
   padding: 14px 18px;
@@ -169,6 +169,15 @@ input.filter-field__control {
   font-weight: 600;
   line-height: 1.4;
   color: var(--tl-text);
+  overflow-wrap: anywhere;
+}
+.task-item__notes {
+  grid-area: notes;
+  margin: 0;
+  color: var(--tl-muted);
+  font-size: 12.5px;
+  line-height: 1.5;
+  white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
 .task-item.is-completed .task-item__title {
@@ -273,7 +282,9 @@ input.filter-field__control {
   padding-top: 4px;
 }
 .task-item__editor-input,
-.task-item__editor-date {
+.task-item__editor-date,
+.task-item__editor-textarea,
+.task-item__editor-select {
   box-sizing: border-box;
   width: 100%;
   min-height: 36px;
@@ -285,11 +296,37 @@ input.filter-field__control {
   border: 1px solid rgba(148, 163, 184, 0.6);
   border-radius: 10px;
   outline: none;
+  resize: vertical;
+}
+.task-item__editor-textarea {
+  min-height: 72px;
 }
 .task-item__editor-input:focus,
-.task-item__editor-date:focus {
+.task-item__editor-date:focus,
+.task-item__editor-textarea:focus,
+.task-item__editor-select:focus {
   border-color: var(--tl-accent);
   box-shadow: 0 0 0 3px var(--tl-accent-soft);
+}
+.task-item__editor-course-group {
+  display: grid;
+  gap: 8px;
+}
+.task-item__editor-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--tl-muted);
+}
+.task-item__editor-course-row {
+  display: flex;
+  gap: 8px;
+}
+.task-item__editor-input--compact {
+  min-height: 32px;
+}
+.task-item__editor-btn--small {
+  min-width: 72px;
+  padding: 7px 10px;
 }
 .task-item__editor-actions {
   display: flex;
@@ -458,26 +495,69 @@ input.filter-field__control {
 }
 
 @media (max-width: 720px) {
+  .tl-container {
+    width: 100%;
+    max-width: 100%;
+    padding-inline: 0;
+  }
+
   .task-item {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 8px;
-    padding: 12px 14px;
+    display: grid;
+    grid-template-columns: 22px minmax(0, 1fr) auto;
+    grid-template-areas:
+      "check title actions"
+      "check notes actions"
+      "check meta actions";
+    column-gap: 10px;
+    row-gap: 6px;
+    padding: 12px 12px 10px;
     animation-name: tl-layout-b;
   }
+
   .task-item__top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
+    display: contents;
   }
+
   .task-item__check {
-    margin-top: 0;
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
   }
-  .task-item__delete {
-    align-self: center;
-    margin: -4px -6px -4px 0;
+
+  .task-item__title {
+    font-size: 1.02rem;
+    line-height: 1.35;
+  }
+
+  .task-item__notes {
+    font-size: 0.82rem;
+    line-height: 1.45;
+  }
+
+  .task-item__meta {
+    gap: 6px 8px;
+    font-size: 0.76rem;
+  }
+
+  .task-item__course,
+  .task-item__deadline {
+    padding: 4px 8px;
+  }
+
+  .task-item__actions {
+    grid-area: actions;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin: 0;
+  }
+
+  .task-item__delete,
+  .task-item__edit {
+    width: 28px;
+    height: 28px;
   }
 }
 

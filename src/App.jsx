@@ -19,10 +19,12 @@ function App() {
     return firstVault ? switchVault(firstVault.id) : null;
   });
   const [todo, setTodo] = useState(() =>
-    currentVault ? new TaskStorage(currentVault).getTasks() : []
+    currentVault ? new TaskStorage(currentVault).getTasks() : [],
   );
 
-  const [showWelcome, setShowWelcome] = useState(() => getVaults().length === 0);
+  const [showWelcome, setShowWelcome] = useState(
+    () => getVaults().length === 0,
+  );
   const taskStorage = currentVault ? new TaskStorage(currentVault) : null;
 
   const handleVaultChange = (vault) => {
@@ -69,9 +71,11 @@ function App() {
                 tasks={todo}
                 setTasks={setTodo}
                 taskStorage={taskStorage}
+                vault={currentVault}
               />
 
               <TaskForm
+                vault={currentVault}
                 onAddTask={(newTask) => {
                   const task = { ...newTask, id: Date.now() };
                   taskStorage.addTask(task);
