@@ -88,7 +88,7 @@ npm run lint     # Memeriksa kode dengan Oxlint
 | Kontributor | Bagian                             |
 | ----------- | ---------------------------------- |
 | Farell      | Form tugas                         |
-| Alizah      | Daftar tugas                       |
+| Aliza       | Daftar tugas                       |
 | Davie       | Integrasi aplikasi dan fitur vault |
 
 ## Keterbatasan
