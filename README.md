@@ -6,9 +6,9 @@ Task Mate adalah aplikasi daftar tugas untuk membantu mengatur pekerjaan kuliah 
 
 | Nama   | GitHub                                       |
 | ------ | -------------------------------------------- |
-| Farell | [@frevszz](https://github.com/frevszz)       |
-| Alizah | [@aliali8230](https://github.com/aliali8230) |
-| Davie  | [@abcdavk](https://github.com/abcdavk)       |
+| Farell Dio R / 123250008 | [@frevszz](https://github.com/frevszz)       |
+| Aliza Alfarisi / 123240035 | [@aliali8230](https://github.com/aliali8230) |
+| Farieza Davie R / 123250042   | [@abcdavk](https://github.com/abcdavk)       |
 
 ## Dokumentasi
 
