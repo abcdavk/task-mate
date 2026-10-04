@@ -48,14 +48,14 @@ task-mate/
 
 | Selesai | No. | Fitur           | Keterangan                                                                                                                   |
 | ------- | --: | --------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| [x]     |  01 | Tambah tugas    | Judul dan tanggal wajib diisi serta catatan opsional; mata kuliah belum diwajibkan seperti pada spesifikasi.                 |
-| [x]     |  02 | Daftar tugas    | Menampilkan detail dan status tugas, serta petunjuk saat daftar kosong atau tidak ada hasil yang sesuai.                     |
-| [x]     |  03 | Edit dan hapus  | Detail tugas dapat diedit dan perubahan dapat dibatalkan; penghapusan meminta konfirmasi.                                    |
-| [x]     |  04 | Status tugas    | Status tugas dapat diubah antara belum selesai dan selesai.                                                                  |
-| [x]     |  05 | Cari dan filter | Pencarian judul tidak membedakan huruf besar/kecil; filter tersedia untuk semua, belum selesai, dan selesai.                 |
-| [x]     |  06 | Ringkasan       | Menampilkan jumlah total tugas, tugas belum selesai, dan tugas selesai.                                                      |
-| [x]     |  07 | Simpan otomatis | Perubahan tersimpan di `localStorage` dan tersedia kembali setelah halaman dimuat ulang di browser yang sama.                |
-| [x]     |  08 | Responsif       | Aturan layout mobile dan desktop tersedia; tampilan tanpa scroll horizontal pada lebar 360 px dan 1280 px masih perlu diuji. |
+| [v]     |  01 | Tambah tugas    | Judul dan tanggal wajib diisi dan matakuliah serta catatan opsional                                                          |
+| [v]     |  02 | Daftar tugas    | Menampilkan detail dan status tugas, serta petunjuk saat daftar kosong atau tidak ada hasil yang sesuai.                     |
+| [v]     |  03 | Edit dan hapus  | Detail tugas dapat diedit dan perubahan dapat dibatalkan, penghapusan meminta konfirmasi.                                    |
+| [v]     |  04 | Status tugas    | Status tugas dapat diubah antara belum selesai dan selesai.                                                                  |
+| [v]     |  05 | Cari dan filter | Pencarian judul tidak membedakan huruf besar/kecil, filter tersedia untuk semua, belum selesai, dan selesai.                 |
+| [v]     |  06 | Ringkasan       | Menampilkan jumlah total tugas, tugas belum selesai, dan tugas selesai.                                                      |
+| [v]     |  07 | Simpan otomatis | Perubahan tersimpan di `localStorage` dan tersedia kembali setelah halaman dimuat ulang di browser yang sama.                |
+| [v]     |  08 | Responsif       | Aturan layout mobile dan desktop tersedia; tampilan tanpa scroll horizontal pada lebar 360 px dan 1280 px masih perlu diuji. |
 
 ## Cara Menjalankan
 
