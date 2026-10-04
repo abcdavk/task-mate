@@ -4,11 +4,11 @@ Task Mate adalah aplikasi daftar tugas untuk membantu mengatur pekerjaan kuliah 
 
 ## Pembuat
 
-| Nama   | GitHub                                       |
-| ------ | -------------------------------------------- |
-| Farell Dio R / 123250008 | [@frevszz](https://github.com/frevszz)       |
-| Aliza Alfarisi / 123240035 | [@aliali8230](https://github.com/aliali8230) |
-| Farieza Davie R / 123250042   | [@abcdavk](https://github.com/abcdavk)       |
+| Nama                        | GitHub                                       |
+| --------------------------- | -------------------------------------------- |
+| Farell Dio R / 123250008    | [@frevszz](https://github.com/frevszz)       |
+| Aliza Alfarisi / 123240035  | [@aliali8230](https://github.com/aliali8230) |
+| Farieza Davie R / 123250042 | [@abcdavk](https://github.com/abcdavk)       |
 
 ## Dokumentasi
 
@@ -48,7 +48,7 @@ task-mate/
 
 | Selesai | No. | Fitur           | Keterangan                                                                                                                   |
 | ------- | --: | --------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| [v]     |  01 | Tambah tugas    | Judul dan tanggal wajib diisi dan matakuliah serta catatan opsional                                                          |
+| [v]     |  01 | Tambah tugas    | Judul, tanggal, dan mata kuliah wajib diisi; catatan bersifat opsional.                                                      |
 | [v]     |  02 | Daftar tugas    | Menampilkan detail dan status tugas, serta petunjuk saat daftar kosong atau tidak ada hasil yang sesuai.                     |
 | [v]     |  03 | Edit dan hapus  | Detail tugas dapat diedit dan perubahan dapat dibatalkan, penghapusan meminta konfirmasi.                                    |
 | [v]     |  04 | Status tugas    | Status tugas dapat diubah antara belum selesai dan selesai.                                                                  |

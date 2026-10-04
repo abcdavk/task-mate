@@ -120,12 +120,28 @@ export default function Form({ onAddTask, vault }) {
     const tgl = tglTodoRef.current.value;
     const notes = notesTodoRef.current.value.trim();
 
-    if (!judul || !tgl) {
-      setError("Tugas dan tanggal tidak boleh kosong");
+    if (!judul) {
+      setError("Judul tugas wajib diisi.");
       return;
     }
 
-    onAddTask({ judul, tgl, notes, kategori: selectedCourse, selesai: false });
+    if (!tgl) {
+      setError("Tanggal tugas wajib diisi.");
+      return;
+    }
+
+    if (!selectedCourse.trim()) {
+      setError("Mata kuliah wajib dipilih.");
+      return;
+    }
+
+    onAddTask({
+      judul,
+      tgl,
+      notes,
+      kategori: selectedCourse.trim(),
+      selesai: false,
+    });
     judulTodoRef.current.value = "";
     const today = new Date().toISOString().split("T")[0];
     setSelectedDate(today);
