@@ -53,6 +53,32 @@ export function renameVault(id, nama) {
   return updatedVaults.find((vault) => vault.id === id);
 }
 
+export function deleteVault(id) {
+  const vaults = getVaults();
+  const vault = vaults.find((item) => item.id === id);
+
+  if (!vault) return null;
+
+  const remainingVaults = vaults.filter((item) => item.id !== id);
+  localStorage.setItem(VAULTS_KEY, JSON.stringify(remainingVaults));
+
+  const currentVaultId = localStorage.getItem(CURRENT_VAULT_KEY);
+  if (currentVaultId === id) {
+    const nextVault = remainingVaults[0] ?? null;
+
+    if (nextVault) {
+      localStorage.setItem(CURRENT_VAULT_KEY, nextVault.id);
+    } else {
+      localStorage.removeItem(CURRENT_VAULT_KEY);
+    }
+  }
+
+  localStorage.removeItem(`vault:${id}`);
+  localStorage.removeItem(`vault:${vault.nama}`);
+
+  return vault;
+}
+
 export function switchVault(id) {
   const vaults = getVaults();
 

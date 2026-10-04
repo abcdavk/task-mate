@@ -29,7 +29,7 @@ function App() {
 
   const handleVaultChange = (vault) => {
     setCurrentVault(vault);
-    setTodo(new TaskStorage(vault).getTasks());
+    setTodo(vault ? new TaskStorage(vault).getTasks() : []);
   };
 
   const onClose = () => {

@@ -3,12 +3,14 @@ import {
   RiAddLine,
   RiCheckLine,
   RiCloseLine,
+  RiDeleteBinLine,
   RiEdit2Line,
   RiFolderLine,
   RiMenuLine,
 } from "@remixicon/react";
 import {
   createVault,
+  deleteVault,
   getVaults,
   renameVault,
   switchVault,
@@ -70,6 +72,39 @@ export default function VaultSidebar({
     if (selectedVault) {
       onVaultChange(selectedVault);
       setIsMobileOpen(false);
+    }
+  };
+
+  const handleDelete = (id) => {
+    const targetVault = vaults.find((vault) => vault.id === id);
+
+    if (!targetVault) return;
+
+    const isConfirmed = window.confirm(
+      `Hapus vault "${targetVault.nama}"? Tugas di dalamnya juga akan dihapus.`
+    );
+
+    if (!isConfirmed) return;
+
+    const deletedVault = deleteVault(id);
+
+    if (!deletedVault) {
+      setError("Vault gagal dihapus.");
+      return;
+    }
+
+    setEditingVaultId(null);
+    setError("");
+    onVaultsChange(getVaults());
+
+    if (currentVault?.id === id) {
+      const nextVault = getVaults()[0] ?? null;
+      onVaultChange(nextVault);
+      return;
+    }
+
+    if (getVaults().length === 0) {
+      onVaultChange(null);
     }
   };
 
@@ -356,6 +391,32 @@ export default function VaultSidebar({
                         }}
                       >
                         <RiEdit2Line size={17} />
+                      </button>
+
+                      <button
+                        type="button"
+                        className="
+                          mr-1 grid size-8 shrink-0 place-items-center
+                          rounded-lg
+                          text-slate-400
+                          opacity-0
+                          transition
+
+                          group-hover:opacity-100
+
+                          hover:bg-rose-50
+                          hover:text-rose-600
+
+                          focus-visible:opacity-100
+                          focus-visible:outline-2
+                          focus-visible:outline-offset-1
+                          focus-visible:outline-rose-600
+                        "
+                        aria-label={`Hapus vault ${vault.nama}`}
+                        title="Hapus vault"
+                        onClick={() => handleDelete(vault.id)}
+                      >
+                        <RiDeleteBinLine size={17} />
                       </button>
                     </div>
                   )}
