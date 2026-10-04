@@ -44,18 +44,18 @@ task-mate/
 - Menambah dan mengelola pilihan mata kuliah pada vault.
 - Menyimpan data secara lokal di browser tanpa perlu akun.
 
-### Checklist Fitur Wajib
+### Checklist Uji
 
-| Selesai | No. | Fitur           | Keterangan                                                                                                                   |
-| ------- | --: | --------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| [v]     |  01 | Tambah tugas    | Judul, tanggal, dan mata kuliah wajib diisi; catatan bersifat opsional.                                                      |
-| [v]     |  02 | Daftar tugas    | Menampilkan detail dan status tugas, serta petunjuk saat daftar kosong atau tidak ada hasil yang sesuai.                     |
-| [v]     |  03 | Edit dan hapus  | Detail tugas dapat diedit dan perubahan dapat dibatalkan, penghapusan meminta konfirmasi.                                    |
-| [v]     |  04 | Status tugas    | Status tugas dapat diubah antara belum selesai dan selesai.                                                                  |
-| [v]     |  05 | Cari dan filter | Pencarian judul tidak membedakan huruf besar/kecil, filter tersedia untuk semua, belum selesai, dan selesai.                 |
-| [v]     |  06 | Ringkasan       | Menampilkan jumlah total tugas, tugas belum selesai, dan tugas selesai.                                                      |
-| [v]     |  07 | Simpan otomatis | Perubahan tersimpan di `localStorage` dan tersedia kembali setelah halaman dimuat ulang di browser yang sama.                |
-| [v]     |  08 | Responsif       | Aturan layout mobile dan desktop tersedia; tampilan tanpa scroll horizontal pada lebar 360 px dan 1280 px masih perlu diuji. |
+- [v] Validasi judul, mata kuliah, dan tanggal.
+- [v] Tambah tugas dengan data valid, kosong, dan spasi.
+- [v] Simpan perubahan dan batalkan edit.
+- [v] Ubah status tugas.
+- [v] Konfirmasi hapus dan batalkan hapus.
+- [v] Uji pencarian dan filter.
+- [v] Pastikan hasil kosong tidak menampilkan data.
+- [v] Refresh setelah menyimpan perubahan.
+- [v] Uji tampilan responsif pada lebar 360 px dan 1230 px.
+- [v] Pastikan aplikasi berjalan tanpa error di console.
 
 ## Cara Menjalankan
 
